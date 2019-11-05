@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+       		http://www.springframework.org/schema/beans/spring-beans.xsd
+       		http://www.springframework.org/schema/tx 
+       		http://www.springframework.org/schema/tx/spring-tx.xsd
+       		http://www.springframework.org/schema/aop 
+       		http://www.springframework.org/schema/aop/spring-aop.xsd
+       		http://www.springframework.org/schema/context
+       		http://www.springframework.org/schema/context/spring-context.xsd
+       		http://www.springframework.org/schema/task
+       		http://www.springframework.org/schema/task/spring-task-3.1.xsd">
+       		
+	<context:property-placeholder location="classpath:redis.properties" ignore-unresolvable="true"/>
+
+	<!-- redis模板  阿里云 -->
+	<bean id="stringRedisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate">
+		<property name="connectionFactory" ref="connectionFactory"></property>
+	</bean>
+
+	<bean id="connectionFactory"
+		class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+		<property name="hostName" value="${redis.host}" />
+		<property name="password" value="${redis.password}"/>
+		<property name="port" value="${redis.port}" />
+	</bean>
+</beans>
+
+
+		
+	
